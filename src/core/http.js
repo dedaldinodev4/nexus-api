@@ -1,4 +1,4 @@
-import { badRequest, AppError } from "./errors";
+import { badRequest, AppError } from "./errors/index.js";
 
 export function json(res, status, payload, headers = {}) {
   const body = JSON.stringify(payload);

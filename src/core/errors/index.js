@@ -1,7 +1,7 @@
 
-export { AppError } from './error'
-export { badRequest } from './bad-request'
-export { conflict } from './conflit-error'
-export { forbidden } from './forbidden'
-export { notFound } from './not-found'
-export { unauthorized } from './unauthorized'
+export { AppError } from './error.js'
+export { badRequest } from './bad-request.js'
+export { conflict } from './conflit-error.js'
+export { forbidden } from './forbidden.js'
+export { notFound } from './not-found.js'
+export { unauthorized } from './unauthorized.js'

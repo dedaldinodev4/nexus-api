@@ -1,6 +1,6 @@
-import { config } from "./config.js";
-import { db, migrate } from "./db.js";
-import { server  } from "./server";
+import { config } from "./config/index.js";
+import { db, migrate } from "./database/db.js";
+import { server  } from "./server.js";
 
 migrate();
 

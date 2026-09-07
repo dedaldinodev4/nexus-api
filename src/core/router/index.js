@@ -1,4 +1,4 @@
-import { compile } from "./compile";
+import { compile } from "./compile.js";
 
 //* Class Router *//
 export class Router {

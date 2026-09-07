@@ -3,7 +3,7 @@ import {
   createHash, timingSafeEqual
 } from "node:crypto";
 import { promisify } from "node:util";
-import { config } from "./config.js";
+import { config } from "../config/index.js";
 
 const scrypt = promisify(scryptCb);
 

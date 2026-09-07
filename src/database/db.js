@@ -1,7 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { config } from "../config";
+import { config } from "../config/index.js";
 
 mkdirSync(dirname(config.databaseFile), { recursive: true });
 export const db = new DatabaseSync(config.databaseFile);

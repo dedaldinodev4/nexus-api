@@ -7,7 +7,7 @@ function convertNumber (name, fallback) {
 
 export const config = Object.freeze({
   host: process.env.HOST || "127.0.0.1",
-  port: convertNumber("PORT", 3000),
+  port: convertNumber("PORT", 3333),
   databaseFile: process.env.DATABASE_FILE || "./data/nexus.sqlite",
   sessionTtlMs: convertNumber("SESSION_TTL_MS", 7 * 24 * 60 * 60 * 1000),
   rateWindowMs: convertNumber("RATE_LIMIT_WINDOW_MS", 60_000),

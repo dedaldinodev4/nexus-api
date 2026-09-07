@@ -1,4 +1,4 @@
-import { unauthorized } from "./errors";
+import { unauthorized } from "./errors/index.js";
 
 export function requestId() {
   return async ({ req, res, requestId }, next) => {
