@@ -1,0 +1,18 @@
+{
+  "name": "nexus-api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "lint": "node scripts/lint.js",
+    "db:reset": "node scripts/reset-db.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
