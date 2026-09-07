@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { db } from "../../database/db";
+import { db } from "../../database/db.js";
 
 export const tasksRepository = {
   
@@ -7,11 +7,11 @@ export const tasksRepository = {
     "SELECT id,title,description,status,created_at FROM tasks WHERE project_id=? ORDER BY created_at DESC"
   ).all(projectId),
 
-  create: (projectId, title, description = "") => {
+  create: (data) => {
     const id = randomUUID();
     db.prepare(
       "INSERT INTO tasks(id,project_id,title,description,status,created_at) VALUES(?,?,?,?,?,?)"
-    ).run(id, projectId, title, description, "TODO", new Date().toISOString());
+    ).run(id, data.projectId, data.title, data.description, "TODO", new Date().toISOString());
     return db.prepare("SELECT * FROM tasks WHERE id=?").get(id);
   }
 

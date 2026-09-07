@@ -1,4 +1,4 @@
-export { authRepository } from './auth/auth.repository'
-export { projectsRepository } from './projects/projects.repository'
-export { tasksRepository } from './tasks/tasks.repository'
-export { usersRepository } from './users/users.repository'
+export { authRepository } from './auth/auth.repository.js'
+export { projectsRepository } from './projects/projects.repository.js'
+export { tasksRepository } from './tasks/tasks.repository.js'
+export { usersRepository } from './users/users.repository.js'

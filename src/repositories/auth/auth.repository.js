@@ -1,7 +1,8 @@
-import { randomUUID, randomBytes } from "node:crypto";
-import { db } from "../../database/db";
-import { conflict, unauthorized, badRequest } from "../../core/errors";
-import { hashPassword, verifyPassword, tokenHash, cookie } from "../../utils/auth";
+import { randomUUID, randomBytes, createHash } from "node:crypto";
+import { db } from "../../database/db.js";
+import { conflict, unauthorized, badRequest } from "../../core/errors/index.js";
+import { hashPassword, verifyPassword, tokenHash, cookie } from "../../utils/auth.js";
+import { config } from '../../config/index.js' 
 
 
 export const authRepository = {
@@ -45,6 +46,9 @@ export const authRepository = {
       user: { id: user.id, name: user.name, email: user.email, role: user.role },
       setCookie: cookie(token)
     };
+  },
+  logout: async (match) => {
+    const hash = createHash("sha256").update(match[1]).digest("hex");
+    db.prepare("DELETE FROM sessions WHERE token_hash=?").run(hash);
   }
-
 }

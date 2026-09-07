@@ -12,14 +12,19 @@ migrate();
 const router = new Router();
 buildRoutes(router, config);
 
-// const authMiddleware = async ({ req, state }, next) => {
-//   state.user = authenticate(req);
-//   return next();
-// }
+const authMiddleware = async ({ req, state }, next) => {
+  state.user = authenticate(req);
+  return next();
+}
 
 const app = createApp ({
   router,
-  middlewares: []
+  middlewares: [
+    requestId(),
+    securityHeaders(),
+    rateLimit({ windowMs: config.rateWindowMs, max: config.rateMax }),
+    authMiddleware
+  ]
 });
 
 const server = createServer (app);

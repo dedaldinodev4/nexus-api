@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { db } from "../../database/db";
+import { db } from "../../database/db.js";
 
 export const projectsRepository = {
   
@@ -11,13 +11,13 @@ export const projectsRepository = {
     "SELECT id,name,description,created_at FROM projects WHERE id=? AND owner_id=?"
   ).get(id, ownerId),
 
-  create: (ownerId, name, description = "") => {
+  create: (data) => {
     const id = randomUUID();
     db.prepare(
       "INSERT INTO projects(id,owner_id,name,description,created_at) VALUES(?,?,?,?,?)"
-    ).run(id, ownerId, name, description, new Date().toISOString());
-    return projects.findById(id, ownerId);
+    ).run(id, data.ownerId, data.name, data.description, new Date().toISOString());
+    return projectsRepository.findById(id, data.ownerId);
   },
-  
+
   delete: (id, ownerId) => db.prepare("DELETE FROM projects WHERE id=? AND owner_id=?").run(id, ownerId)
 };
