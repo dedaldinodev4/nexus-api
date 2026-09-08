@@ -28,7 +28,7 @@ export function compilePath (path) {
   }).join("/");
   
   return {
-    regex: new RegExp(`^${source || "/"}/?$`),
+    regex: new RegExp(`^${pattern}/?$`),
     keys
   };
 }
