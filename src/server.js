@@ -1,33 +1,23 @@
 import { createServer } from 'node:http'
 import { config } from './config/index.js'
-import { createApp } from './core/app.js'
 import { requestId, securityHeaders, rateLimit } from "./core/middleware.js";
 import { authenticate } from "./middlewares/auth.js";
-import { buildRoutes } from "./routes.js";
-import { Router } from './core/router/index.js';
 import { db, migrate } from "./database/db.js";
+import { buildApp } from './app.js';
 
 migrate();
 
-const router = new Router();
-buildRoutes(router, config);
+
+//buildRoutes(router, config);
 
 const authMiddleware = async ({ req, state }, next) => {
   state.user = authenticate(req);
   return next();
 }
 
-const app = createApp ({
-  router,
-  middlewares: [
-    requestId(),
-    securityHeaders(),
-    rateLimit({ windowMs: config.rateWindowMs, max: config.rateMax }),
-    authMiddleware
-  ]
-});
+const app = buildApp();
 
-const server = createServer (app);
+const server = createServer(app);
 
 server.listen(config.port, config.host, () => {
   console.log(`Nexus API listening on http://${config.host}:${config.port}`);

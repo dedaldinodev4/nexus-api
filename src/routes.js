@@ -8,6 +8,8 @@ import { forbidden } from "./core/errors/index.js";
 
 
 const V1 = 'api/v1'
+
+
 export function buildRoutes(router, { bodyLimit }) {
   // /health - Health route
   router.get("/health", async ({ res }) => {
