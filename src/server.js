@@ -7,9 +7,6 @@ import { buildApp } from './app.js';
 
 migrate();
 
-
-//buildRoutes(router, config);
-
 const authMiddleware = async ({ req, state }, next) => {
   state.user = authenticate(req);
   return next();

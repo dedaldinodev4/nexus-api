@@ -35,8 +35,6 @@ export class UserRepository {
   }
 
   async update(id, { name, email }) {
-    console.log(name, email);
-    
     db.prepare(`
       UPDATE users 
       SET
