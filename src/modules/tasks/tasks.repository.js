@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { db } from "../../database/db.js";
 
 
@@ -50,7 +51,7 @@ export class TaskRepository {
 
   async remove(id) {
     db
-      .prepare(`DELETE * FROM tasks WHERE id=?`)
+      .prepare(`DELETE FROM tasks WHERE id=?`)
       .get(id)
   }
 }

@@ -19,8 +19,8 @@ export class ProjectService {
     return projects;
   }
 
-  async getById(id) {
-    const project = await this.#repository.findById(id)
+  async getById(id, ownerId) {
+    const project = await this.#repository.findById(id, ownerId)
     if (!project) {
       throw notFound(`Project not found.`)
     }
@@ -39,8 +39,8 @@ export class ProjectService {
     return project;
   }
 
-  async update(id, { name, description }) {
-    const project = await this.#repository.findById(id)
+  async update(id, { name, ownerId, description }) {
+    const project = await this.#repository.findById(id, ownerId)
     if (!project) {
       throw notFound(`Project not found.`)
     }
@@ -49,19 +49,20 @@ export class ProjectService {
       id,
       {
         name,
-        description
+        description,
+        ownerId
       }
     );
 
     return result;
   }
 
-  async delete(id) {
-    const project = await this.#repository.findById(id)
+  async delete(id, ownerId) {
+    const project = await this.#repository.findById(id, ownerId)
     if (!project) {
       throw notFound(`Project not found.`)
     }
-    await this.#repository.delete(id)
+    await this.#repository.delete(id, ownerId)
   }
 
   async getAllTasks (projectId, ownerId) {

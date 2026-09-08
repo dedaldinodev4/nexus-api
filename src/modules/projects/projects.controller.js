@@ -13,8 +13,8 @@ export class ProjectController {
     json(res, 200, { data: projects });
   }
 
-  async getById({ res, params }) {
-    const project = await this.#service.getById(params.id);
+  async getById({ res, state, params }) {
+    const project = await this.#service.getById(params.id, state.user.id);
     return json(res, 200, project)
   }
 
@@ -31,7 +31,7 @@ export class ProjectController {
 
   async update({ req, res, state, params }) {
     const body = await readJson(req, config.bodyLimit);
-    const task = await this.#service.update(
+    const project = await this.#service.update(
       params.id,
       {
         name: body.name,
@@ -39,11 +39,11 @@ export class ProjectController {
         description: body.description || ""
       }
     );
-    return json(res, 201, task)
+    return json(res, 201, project)
   }
 
-  async delete({ res, params }) {
-    await this.#service.delete(params.id);
+  async delete({ res, state, params }) {
+    await this.#service.delete(params.id, state.user.id);
     res.writeHead(204);
     res.end();
   }
@@ -53,8 +53,9 @@ export class ProjectController {
     return json(res, 200, { data: tasks });
   }
 
-  async createTask ({ res, state, params }) {
-    const task = await this.#service.create.createTask(
+  async createTask ({ req, res, state, params }) {
+    const body = await readJson(req, config.bodyLimit);
+    const task = await this.#service.createTask(
       state.user.id,
       {
         projectId: params.id,
