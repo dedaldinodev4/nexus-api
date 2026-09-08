@@ -1,4 +1,4 @@
-
+import { randomUUID } from "node:crypto";
 import { requestContext, logger } from "./logger.js";
 import { sendError } from "./http.js";
 import { notFound, AppError } from "./errors/index.js";
@@ -6,7 +6,8 @@ import { notFound, AppError } from "./errors/index.js";
 
 export function createApp({ router, middlewares = [] }) {
   return async function handler(req, res) {
-    const requestId = requestContext.getStore()?.requestId;
+    // const requestId = requestContext.getStore()?.requestId;
+    const requestId = randomUUID();
     const started = performance.now();
     const url = new URL(req.url, "http://localhost");
 

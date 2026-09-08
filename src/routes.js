@@ -4,6 +4,7 @@ import {
   projectsRepository, 
   tasksRepository 
 } from "./repositories/index.js";
+import { forbidden } from "./core/errors/index.js";
 
 
 const V1 = 'api/v1'
@@ -61,7 +62,7 @@ export function buildRoutes(router, { bodyLimit }) {
 
   //* Projects *//
   // GET /projects/:id - get one project by ID
-  router.get("/projects/:id", async ({ res, state, params }) => {
+  router.get(`/${V1}/projects/:id`, async ({ res, state, params }) => {
     const project = projectsRepository.findById(params.id, state.user.id);
     if (!project)
       throw forbidden("Project not found or not owned by user");
@@ -88,10 +89,11 @@ export function buildRoutes(router, { bodyLimit }) {
     json(res, 201, { data: project });
   });
 
-  
-
   // DELETE /projects/:id - delete an project 
-  router.delete("/projects/:id", async ({ res, state, params }) => {
+  router.delete(`/${V1}/projects/:id`, async ({ res, state, params }) => {
+    const project = projectsRepository.findById(params.id, state.user.id);
+    if (!project)
+      throw forbidden("Project not found or not owned by user");
     projectsRepository.delete(params.id, state.user.id);
     res.writeHead(204);
     res.end();
