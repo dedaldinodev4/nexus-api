@@ -15,7 +15,12 @@ const authMiddleware = async ({ req, state }, next) => {
   return next();
 }
 
-const app = buildApp();
+const app = buildApp([
+  requestId(),
+  securityHeaders(),
+  rateLimit({ windowMs: config.rateWindowMs, max: config.rateMax }),
+  authMiddleware
+]);
 
 const server = createServer(app);
 

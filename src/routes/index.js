@@ -1,8 +1,10 @@
-import { registerUserRoutes } from "../modules/users/users.routes.js";
+import { usersRoutes } from "../modules/users/users.routes.js";
+import { authRoutes } from "../modules/auth/auth.routes.js";
 
 
 export function registerRoutes (router) {
-  registerUserRoutes(router, { prefix: "/api/v1" })
+  usersRoutes(router, { prefix: "/api/v1" })
+  authRoutes(router, { prefix: "/api/v1" })
 
   return router;
 }

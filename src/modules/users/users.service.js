@@ -40,13 +40,17 @@ export class UserService {
 
   async getByEmail (email) {
     const user = await this.#repository.findByEmail(email);
-    if (!user) {
-      throw notFound("User not found.");
-    }
-    return user;
+    return user ?? null;
+  }
+
+  async getByEmailWithPassword (email) {
+    const user = await this.#repository.findByEmailWithPassword(email);
+    return user ?? null;
   }
 
   async update (id, data) {
+    //console.log(data);
+    
     const user = await this.#repository.findById(id);
     if (!user) {
       throw notFound("User not found.");

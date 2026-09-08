@@ -28,11 +28,19 @@ export class UserRepository {
       .get(email)
   }
 
+  findByEmailWithPassword (email) {
+    return db
+      .prepare(`SELECT * FROM users WHERE email = ?`)
+      .get(email)
+  }
+
   async update(id, { name, email }) {
+    console.log(name, email);
+    
     db.prepare(`
       UPDATE users 
       SET
-      name = COALESCE(?, name)
+      name = COALESCE(?, name),
       email = COALESCE(?, email) WHERE id = ?
     `).run(name ?? null, email ?? null, id);
 

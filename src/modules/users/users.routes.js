@@ -1,6 +1,6 @@
 import { userFactory } from "./users.factory.js";
 
-export function registerUserRoutes(router, { prefix = "" }) {
+export function usersRoutes(router, { prefix = "" }) {
   const { userController } = userFactory()
   router
     .get(`${prefix}/users`, userController.list.bind(userController))
