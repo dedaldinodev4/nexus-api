@@ -49,8 +49,6 @@ export class UserService {
   }
 
   async update (id, data) {
-    //console.log(data);
-    
     const user = await this.#repository.findById(id);
     if (!user) {
       throw notFound("User not found.");

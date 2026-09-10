@@ -1,7 +1,7 @@
 {
   "name": "nexus-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A production-oriented REST API built with Node.js + JavaScript only.",
   "type": "module",
   "engines": { "node": ">=24" },
   "scripts": {
@@ -13,6 +13,9 @@
     "db:reset": "node scripts/reset-db.js"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Dedaldino Daniel",
+    "email": "dedaldinodev4@gmail.com"
+  },
   "license": "ISC"
 }
