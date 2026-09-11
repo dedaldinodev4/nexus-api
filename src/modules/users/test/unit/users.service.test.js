@@ -14,7 +14,7 @@ describe("UserService", () => {
     service = new UserService(repository);
   });
 
-  it("should return all users", async () => {
+  test("should return all users", async () => {
 
     repository.findMany = async ({ limit, offset }) => {
       assert.strictEqual(limit, 10);
@@ -60,7 +60,7 @@ describe("UserService", () => {
     });
   });
 
-  it("should use default pagination", async () => {
+  test("should use default pagination", async () => {
 
     repository.findMany = async ({ limit, offset }) => {
       assert.strictEqual(limit, 10);
@@ -82,7 +82,7 @@ describe("UserService", () => {
     });
   });
 
-  it("should return user by id", async () => {
+  test("should return user by id", async () => {
     repository.findById = async (id) => ({
       id,
       name: "Dedaldino",
@@ -98,7 +98,7 @@ describe("UserService", () => {
     });
   });
 
-  it("should throw 404 when user does not exist", async () => {
+  test("should throw 404 when user does not exist", async () => {
     repository.findById = async () => null;
 
     await assert.rejects(

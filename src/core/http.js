@@ -18,7 +18,8 @@ export function empty(res, status = 204, headers = {}) {
 export async function readBody(req, limit) {
   const contentLength = Number(req.headers["content-length"] || 0);
   if (contentLength > limit) throw new AppError(413, "PAYLOAD_TOO_LARGE", "Request body is too large");
-
+    console.log(req);
+    
   const chunks = [];
   let size = 0;
   for await (const chunk of req) {
