@@ -28,7 +28,7 @@ Register:
 curl -i -c cookies.txt \
   -H 'content-type: application/json' \
   -d '{"name":"Ada","email":"ada@example.com","password":"StrongPass123!"}' \
-  http://127.0.0.1:3333/auth/register
+  http://127.0.0.1:3333/api/v1/auth/register
 ```
 
 Login:
@@ -36,7 +36,7 @@ Login:
 curl -i -c cookies.txt \
   -H 'content-type: application/json' \
   -d '{"email":"ada@example.com","password":"StrongPass123!"}' \
-  http://127.0.0.1:3333/auth/login
+  http://127.0.0.1:3333/api/v1/auth/login
 ```
 
 Create a project:
@@ -44,7 +44,7 @@ Create a project:
 curl -b cookies.txt \
   -H 'content-type: application/json' \
   -d '{"name":"Nexus Lab","description":"Native Node project"}' \
-  http://127.0.0.1:3333/projects
+  http://127.0.0.1:3333/api/v1/projects
 ```
 
 ## Architecture
